@@ -3,6 +3,7 @@
  */
 package iscteiul.ista.battleship;
 
+
 public class Barge extends Ship {
     private static final Integer SIZE = Integer.valueOf(1);
     private static final String NAME = "Barca";
