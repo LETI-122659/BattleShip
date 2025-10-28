@@ -25,8 +25,8 @@ public class Game implements IGame {
      */
     public Game(IFleet fleet) {
         shots = new ArrayList<>();
-        countInvalidShots = 0;
-        countRepeatedShots = 0;
+        countInvalidShots = Integer.valueOf(0);
+        countRepeatedShots = Integer.valueOf(0);
         this.fleet = fleet;
     }
 
@@ -155,7 +155,7 @@ public class Game implements IGame {
      * Prints the board showing valid shots that have been fired
      */
     public void printValidShots() {
-        printBoard(getShots(), 'X');
+        printBoard(getShots(), (Character) 'X');
     }
 
 
@@ -168,7 +168,7 @@ public class Game implements IGame {
         for (IShip s : fleet.getShips())
             shipPositions.addAll(s.getPositions());
 
-        printBoard(shipPositions, '#');
+        printBoard(shipPositions, (Character)'#');
     }
 
 }

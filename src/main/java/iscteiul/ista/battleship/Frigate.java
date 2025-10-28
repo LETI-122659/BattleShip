@@ -4,7 +4,7 @@
 package iscteiul.ista.battleship;
 
 public class Frigate extends Ship {
-    private static final Integer SIZE = 4;
+    private static final Integer SIZE = Integer.valueOf(4);
     private static final String NAME = "Fragata";
 
     /**

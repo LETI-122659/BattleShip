@@ -10,7 +10,7 @@
 
   <name>Battleship</name>
   <description>A simple Battleship.</description>
-  <url>https://github.com/alopes-iul/Battleship</url>
+  <url>https://github.com/LETI-122659/Battleship</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,12 +42,17 @@
       <version>2.25.2</version>
       <scope>compile</scope>
     </dependency>
+  </dependencies>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </reporting>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>
