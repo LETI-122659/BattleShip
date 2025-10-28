@@ -47,6 +47,8 @@ public class Position implements IPosition {
         return Objects.hash(column, isHit, isOccupied, row);
     }
 
+
+
     /*
      * (non-Javadoc)
      *
