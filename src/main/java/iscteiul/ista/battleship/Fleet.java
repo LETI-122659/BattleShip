@@ -38,10 +38,11 @@ public class Fleet implements IFleet {
     @Override
     public boolean addShip(IShip s) {
         boolean result = false;
-        if ((ships.size() <= FLEET_SIZE) && (isInsideBoard(s)) && (!colisionRisk(s))) {
+        if ((ships.size() < FLEET_SIZE) && (isInsideBoard(s)) && (!colisionRisk(s))) {
             ships.add(s);
             result = true;
         }
+
         return result;
     }
 
@@ -93,7 +94,7 @@ public class Fleet implements IFleet {
                 && s.getBottomMostPos() <= BOARD_SIZE - 1);
     }
 
-    private boolean colisionRisk(IShip s) {
+    public boolean colisionRisk(IShip s) {
         for (int i = 0; i < ships.size(); i++) {
             if (ships.get(i).tooCloseTo(s))
                 return true;
@@ -137,7 +138,7 @@ public class Fleet implements IFleet {
     /**
      * This operation prints all the ships of a fleet
      */
-    void printAllShips() {
+    public void printAllShips() {
         printShips(ships);
     }
 
