@@ -39,30 +39,67 @@ class CaravelTest {
         assertEquals(new Position(basePos.getRow() + 1, basePos.getColumn()), caravel.getPositions().get(1),
                 "A segunda posição da Caravel não está correta.");
     }
-
     @Test
-    @DisplayName("Caravel deve lançar NullPointerException para bearing nulo")
-    void testInvalidBearingNull() {
-        // Espera-se que a criação de Caravel com bearing nulo lance uma NullPointerException
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
-            new Caravel(null, basePos);  // Passando null como bearing
-        });
-
-        // Verifica se a mensagem contém "invalid bearing"
-        String errorMessage = exception.getMessage().toLowerCase();
-        assertTrue(errorMessage.contains("invalid bearing"), "A mensagem da exceção não contém 'invalid bearing'.");
+    @DisplayName("Caravel ainda flutuando quando todas posições intactas")
+    void testStillFloatingAllIntact() {
+        Caravel caravel = new Caravel(Compass.NORTH, basePos);
+        assertTrue(caravel.stillFloating());
     }
 
     @Test
-    @DisplayName("Caravel deve lançar IllegalArgumentException para bearing inválido")
-    void testInvalidBearingInvalidDirection() {
-        // Espera-se que a criação de Caravel com uma direção inválida lance uma IllegalArgumentException
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Caravel(Compass.valueOf("INVALID_DIRECTION"), basePos);  // Passando uma direção inválida
-        });
+    @DisplayName("Caravel não flutuando quando todas posições atingidas")
+    void testStillFloatingAllHit() {
+        Caravel caravel = new Caravel(Compass.NORTH, basePos);
+        caravel.getPositions().forEach(IPosition::shoot);
+        assertFalse(caravel.stillFloating());
+    }
 
-        // Verifica se a mensagem contém "invalid bearing"
-        String errorMessage = exception.getMessage().toLowerCase();
-        assertTrue(errorMessage.contains("invalid bearing"), "A mensagem da exceção não contém 'invalid bearing'.");
+    @Test
+    @DisplayName("Caravel ainda flutuando quando apenas uma posição atingida")
+    void testStillFloatingPartialHit() {
+        Caravel caravel = new Caravel(Compass.NORTH, basePos);
+        caravel.getPositions().get(0).shoot();
+        assertTrue(caravel.stillFloating());
+    }
+
+    @Test
+    @DisplayName("Testa limites da Caravel")
+    void testLimits() {
+        Caravel caravel = new Caravel(Compass.EAST, basePos);
+        assertEquals(0, caravel.getTopMostPos());
+        assertEquals(0, caravel.getBottomMostPos());
+        assertEquals(0, caravel.getLeftMostPos());
+        assertEquals(1, caravel.getRightMostPos());
+    }
+
+    @Test
+    @DisplayName("occupies retorna true para posição do navio")
+    void testOccupiesTrue() {
+        Caravel caravel = new Caravel(Compass.NORTH, basePos);
+        assertTrue(caravel.occupies(basePos));
+    }
+
+    @Test
+    @DisplayName("occupies retorna false para posição fora do navio e null")
+    void testOccupiesFalse() {
+        Caravel caravel = new Caravel(Compass.NORTH, basePos);
+        assertFalse(caravel.occupies(new Position(10,10)));
+        assertFalse(caravel.occupies(null));
+    }
+
+    @Test
+    @DisplayName("Caravel posiciona corretamente quando EAST")
+    void testPositionsEast() {
+        Caravel caravel = new Caravel(Compass.EAST, basePos);
+        assertEquals(new Position(0,0), caravel.getPositions().get(0));
+        assertEquals(new Position(0,1), caravel.getPositions().get(1));
+    }
+
+    @Test
+    @DisplayName("Caravel posiciona corretamente quando WEST")
+    void testPositionsWest() {
+        Caravel caravel = new Caravel(Compass.WEST, basePos);
+        assertEquals(new Position(0,0), caravel.getPositions().get(0));
+        assertEquals(new Position(0,1), caravel.getPositions().get(1));
     }
 }

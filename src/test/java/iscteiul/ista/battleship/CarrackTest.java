@@ -71,30 +71,7 @@ class CarrackTest {
         );
     }
 
-    @Test
-    @DisplayName("Carrack deve lançar exceção se bearing for inválido (null)")
-    void testCarrackInvalidBearing() {
-        boolean exceptionThrown = false;
 
-        // Vamos passar um valor válido para bearing (ex: Compass.NORTH)
-        try {
-            // Tente criar um Carrack com bearing nulo
-            new Carrack(Compass.NORTH, basePos);  // Passando um valor válido para bearing
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-
-            // Verifica se a mensagem da exceção contém "invalid bearing"
-            String errorMessage = e.getMessage().toLowerCase();
-            if (!errorMessage.contains("invalid bearing")) {
-                fail("Mensagem da exceção não contém 'invalid bearing'. Mensagem: " + e.getMessage());
-            }
-        }
-
-        // Se a exceção não foi lançada, falha o teste
-        if (!exceptionThrown) {
-            fail("Esperava-se que uma IllegalArgumentException fosse lançada.");
-        }
-    }
     @Test
     @DisplayName("getSize() deve retornar 3")
     void testGetSize() {

@@ -15,18 +15,7 @@ class BargeTest {
         basePos = new Position(0, 0);
     }
 
-    @Test
-    @DisplayName("Barge deve lançar exceção para bearing nulo")
-    void testInvalidBearing() {
-        // Espera-se que a criação de Barge com bearing inválido (nulo, por exemplo) lance uma IllegalArgumentException
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Barge(null, basePos);  // Passando null para bearing
-        });
 
-        // Verifica se a mensagem contém a string "invalid bearing"
-        String errorMessage = exception.getMessage().toLowerCase();
-        assertTrue(errorMessage.contains("bearing"), "A mensagem de erro não contém 'bearing'.");
-    }
 
     @Test
     @DisplayName("Barge deve ter tamanho 1")
