@@ -73,8 +73,11 @@ public class Position implements IPosition {
      */
     @Override
     public boolean isAdjacentTo(IPosition other) {
-        return (Math.abs(this.getRow() - other.getRow()) <= 1 && Math.abs(this.getColumn() - other.getColumn()) <= 1);
+        if (other == null || this.equals(other)) return false; // descarta null e mesma posição
+        return Math.abs(this.getRow() - other.getRow()) <= 1 &&
+                Math.abs(this.getColumn() - other.getColumn()) <= 1;
     }
+
 
     /*
      * (non-Javadoc)
@@ -120,5 +123,6 @@ public class Position implements IPosition {
     public String toString() {
         return ("Linha = " + row + " Coluna = " + column);
     }
+
 
 }
