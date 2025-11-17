@@ -151,7 +151,7 @@ public abstract class Ship implements IShip {
      * @see battleship.IShip#getLeftMostPos()
      */
     @Override
-    public int getLeftMostPos() {
+    public int getLeftMostPos() { // coisa com o if
         int left = getPositions().get(0).getColumn();
         for (int i = 1; i < getSize(); i++)
             if (getPositions().get(i).getColumn() < left)
