@@ -23,50 +23,59 @@ class GalleonTest {
     }
 
     @Test
-    @DisplayName("Positions are contiguous when facing EAST")
+    @DisplayName("Positions are correct when facing EAST")
     void testPositionsEast() {
         Position start = new Position(2, 3);
         Galleon g = new Galleon(Compass.EAST, start);
 
-        for (int i = 0; i < g.getSize(); i++) {
-            assertEquals(start.getRow(), g.getPositions().get(i).getRow());
-            assertEquals(start.getColumn() + i, g.getPositions().get(i).getColumn());
-        }
+        assertEquals(new Position(2, 3), g.getPositions().get(0));
+        assertEquals(new Position(3, 1), g.getPositions().get(1));
+        assertEquals(new Position(3, 2), g.getPositions().get(2));
+        assertEquals(new Position(3, 3), g.getPositions().get(3));
+        assertEquals(new Position(4, 3), g.getPositions().get(4));
     }
 
     @Test
-    @DisplayName("Positions are contiguous when facing WEST")
+    @DisplayName("Positions are correct when facing WEST")
     void testPositionsWest() {
         Position start = new Position(5, 10);
         Galleon g = new Galleon(Compass.WEST, start);
 
-        for (int i = 0; i < g.getSize(); i++) {
-            assertEquals(start.getRow(), g.getPositions().get(i).getRow());
-        }
+        assertEquals(new Position(5, 10), g.getPositions().get(0));
+        assertEquals(new Position(6, 10), g.getPositions().get(1));
+        assertEquals(new Position(6, 11), g.getPositions().get(2));
+        assertEquals(new Position(6, 12), g.getPositions().get(3));
+        assertEquals(new Position(7, 10), g.getPositions().get(4));
     }
 
     @Test
-    @DisplayName("Positions are contiguous when facing NORTH")
+    @DisplayName("Positions are correct when facing NORTH")
     void testPositionsNorth() {
-        Position start = new Position(1, 1);
+        Position start = new Position(5, 5);
         Galleon g = new Galleon(Compass.NORTH, start);
 
-        for (int i = 0; i < g.getSize(); i++) {
-            assertEquals(start.getRow() + i, g.getPositions().get(i).getRow());
-            assertEquals(start.getColumn(), g.getPositions().get(i).getColumn());
-        }
+        assertEquals(new Position(5, 5), g.getPositions().get(0));
+        assertEquals(new Position(5, 6), g.getPositions().get(1));
+        assertEquals(new Position(5, 7), g.getPositions().get(2));
+        assertEquals(new Position(6, 6), g.getPositions().get(3));
+        assertEquals(new Position(7, 6), g.getPositions().get(4));
     }
 
+
     @Test
-    @DisplayName("Positions are contiguous when facing SOUTH")
+    @DisplayName("Positions are correct when facing SOUTH")
     void testPositionsSouth() {
         Position start = new Position(3, 4);
         Galleon g = new Galleon(Compass.SOUTH, start);
 
-        for (int i = 0; i < g.getSize(); i++) {
-            assertEquals(start.getColumn(), g.getPositions().get(i).getColumn());
-        }
+        assertEquals(new Position(3, 4), g.getPositions().get(0));
+        assertEquals(new Position(4, 4), g.getPositions().get(1));
+        assertEquals(new Position(5, 3), g.getPositions().get(2));
+        assertEquals(new Position(5, 4), g.getPositions().get(3));
+        assertEquals(new Position(5, 5), g.getPositions().get(4));
     }
+
+
 
     @Test
     @DisplayName("Occupies returns correct values")
@@ -74,7 +83,6 @@ class GalleonTest {
         Galleon g = new Galleon(Compass.NORTH, new Position(1, 1));
 
         assertTrue(g.occupies(new Position(1, 1)));
-        assertTrue(g.occupies(new Position(1 + g.getSize() - 1, 1)));
         assertFalse(g.occupies(new Position(50, 50)));
     }
 
@@ -111,9 +119,9 @@ class GalleonTest {
         Galleon g = new Galleon(Compass.NORTH, new Position(5, 5));
 
         assertEquals(5, g.getTopMostPos());
-        assertEquals(5 + g.getSize() - 1, g.getBottomMostPos());
+        assertEquals(3 + g.getSize() - 1, g.getBottomMostPos());
         assertEquals(5, g.getLeftMostPos());
-        assertEquals(5, g.getRightMostPos());
+        assertEquals(7, g.getRightMostPos());
     }
 
     @Test
