@@ -29,7 +29,7 @@
         </dependencies>
     </dependencyManagement>
 
-<dependencies>
+    <dependencies>
         <!-- JUnit 6 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -45,12 +45,12 @@
             <scope>compile</scope>
         </dependency>
 
-         <dependency>
-          <groupId>org.mockito</groupId>
-          <artifactId>mockito-core</artifactId>
-          <version>5.14.2</version>
-          <scope>test</scope>
-      </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.14.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 
