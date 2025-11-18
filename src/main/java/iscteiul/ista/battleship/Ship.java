@@ -180,13 +180,14 @@ public abstract class Ship implements IShip {
      */
     @Override
     public boolean occupies(IPosition pos) {
-        assert pos != null;
-
+        if (pos == null) return false; // branch para null
         for (int i = 0; i < getSize(); i++)
             if (getPositions().get(i).equals(pos))
                 return true;
         return false;
     }
+
+
 
     /*
      * (non-Javadoc)
@@ -237,7 +238,8 @@ public abstract class Ship implements IShip {
 
     @Override
     public String toString() {
-        return "[" + category + " " + bearing + " " + pos + "]";
+        return "[" + category + " " + bearing + " " + positions + "]";
     }
+
 
 }
