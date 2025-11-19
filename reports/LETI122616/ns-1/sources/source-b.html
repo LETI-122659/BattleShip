@@ -240,7 +240,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;     * @see battleship.IShip#getLeftMostPos()
 &nbsp;     */
 &nbsp;    @Override
-&nbsp;    public int getLeftMostPos() {
+&nbsp;    public int getLeftMostPos() { // coisa com o if
 <b class="fc">&nbsp;        int left = getPositions().get(0).getColumn();</b>
 <b class="fc">&nbsp;        for (int i = 1; i &lt; getSize(); i++)</b>
 <b class="pc">&nbsp;            if (getPositions().get(i).getColumn() &lt; left)</b>
@@ -355,7 +355,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-18 15:04</div>
+    <div style="float:right;">generated on 2025-11-19 18:26</div>
 </div>
 </body>
 </html>
