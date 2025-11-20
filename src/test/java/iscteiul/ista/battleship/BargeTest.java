@@ -1,6 +1,8 @@
 package iscteiul.ista.battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,9 @@ class BargeTest {
 
 
 
+
     @Test
+    @TmsLink("TC-BARGE-001")
     @DisplayName("Barge deve ter tamanho 1")
     void testGetSize() {
         // Criar a instância da Barge com uma direção válida (NORTE, por exemplo)
@@ -28,6 +32,7 @@ class BargeTest {
     }
 
     @Test
+    @TmsLink("TC-BARGE-002")
     @DisplayName("Barge deve adicionar a posição correta")
     void testGetPositions() {
         // Criando a instância da Barge

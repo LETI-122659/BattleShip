@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -88,6 +89,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-001")
     @DisplayName("buildShip() cria instâncias corretas")
     void buildShip() {
         Position pos = new Position(0,0);
@@ -100,6 +102,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-002")
     @DisplayName("getCategory, getBearing e getPosition")
     void getters() {
         assertEquals("fragata", ship.getCategory());
@@ -108,6 +111,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-003")
     @DisplayName("getPositions retorna lista completa")
     void getPositions() {
         assertEquals(3, ship.getPositions().size());
@@ -115,6 +119,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-004")
     @DisplayName("stillFloating() retorna true/false corretamente")
     void stillFloating() {
         assertTrue(ship.stillFloating());
@@ -125,6 +130,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-005")
     @DisplayName("stillFloating() com lista vazia retorna false")
     void stillFloatingEmpty() {
         TestShip emptyShip = new TestShip("barca", Compass.EAST, new TestPosition(0,0));
@@ -133,6 +139,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-006")
     @DisplayName("getTopMostPos, getBottomMostPos, getLeftMostPos, getRightMostPos")
     void positionBoundaries() {
         assertEquals(1, ship.getTopMostPos());
@@ -142,6 +149,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-007")
     @DisplayName("occupies() identifica corretamente as posições")
     void occupies() {
         assertTrue(ship.occupies(pos1));
@@ -151,6 +159,7 @@ class ShipTest {
 
 
     @Test
+    @TmsLink("TC-SHIP-008")
     @DisplayName("tooCloseTo(IPosition) detecta proximidade")
     void tooCloseToPosition() {
         assertTrue(ship.tooCloseTo(new TestPosition(2,3)));
@@ -158,6 +167,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-009")
     @DisplayName("tooCloseTo(IShip) detecta proximidade entre navios")
     void tooCloseToShip() {
         Ship other = new TestShip("caravela", Compass.SOUTH, new TestPosition(4,3));
@@ -175,6 +185,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-010")
     @DisplayName("shoot() marca posição correta")
     void shoot() {
         ship.shoot(pos2);
@@ -183,6 +194,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-011")
     @DisplayName("shoot() com posição não pertencente ao navio não altera hits")
     void shootNonExisting() {
         TestPosition notOnShip = new TestPosition(99, 99);
@@ -193,6 +205,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-012")
     @DisplayName("shoot() com lista vazia não lança exceção")
     void shootEmptyList() {
         TestShip emptyShip = new TestShip("barca", Compass.EAST, new TestPosition(0,0));
@@ -201,6 +214,7 @@ class ShipTest {
     }
 
     @Test
+    @TmsLink("TC-SHIP-013")
     @DisplayName("toString() contém categoria, direção e posição inicial")
     void testToString() {
         String result = ship.toString();

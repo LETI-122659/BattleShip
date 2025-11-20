@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,7 @@ class CompassTest {
     }
 
     @Test
+    @TmsLink("TC-COMPASS-001")
     @DisplayName("getDirection() deve retornar o caractere correto")
     void getDirection() {
         assertEquals('n', Compass.NORTH.getDirection());
@@ -26,6 +28,7 @@ class CompassTest {
     }
 
     @Test
+    @TmsLink("TC-COMPASS-002")
     @DisplayName("toString() deve retornar o caractere correto")
     void testToString() {
         assertEquals("n", Compass.NORTH.toString());
@@ -36,6 +39,7 @@ class CompassTest {
     }
 
     @Test
+    @TmsLink("TC-COMPASS-003")
     @DisplayName("charToCompass() deve converter corretamente os caracteres")
     void charToCompass() {
         assertEquals(Compass.NORTH, Compass.charToCompass('n'));
@@ -46,6 +50,7 @@ class CompassTest {
     }
 
     @Test
+    @TmsLink("TC-COMPASS-004")
     @DisplayName("values() deve conter todas as direções esperadas")
     void values() {
         Compass[] values = Compass.values();
@@ -57,6 +62,7 @@ class CompassTest {
     }
 
     @Test
+    @TmsLink("TC-COMPASS-005")
     @DisplayName("valueOf() deve retornar a enumeração correta pelo nome")
     void valueOf() {
         assertEquals(Compass.NORTH, Compass.valueOf("NORTH"));

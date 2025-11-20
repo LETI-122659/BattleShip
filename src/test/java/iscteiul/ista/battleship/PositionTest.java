@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,12 +20,14 @@ class PositionTest {
     }
 
     @Test
+    @TmsLink("TC-POSITION-001")
     void testGetRowAndColumn() {
         assertEquals(2, position.getRow());
         assertEquals(3, position.getColumn());
     }
 
     @Test
+    @TmsLink("TC-POSITION-002")
     void testEquals() {
         Position same = new Position(2, 3);
         Position diffRow = new Position(4, 3);
@@ -51,6 +54,7 @@ class PositionTest {
     }
 
     @Test
+    @TmsLink("TC-POSITION-003")
     void testHashCode() {
         Position same = new Position(2, 3);
         assertEquals(position.hashCode(), same.hashCode());
@@ -64,6 +68,7 @@ class PositionTest {
     }
 
     @Test
+    @TmsLink("TC-POSITION-004")
     void testIsAdjacentTo() {
         Position adj1 = new Position(2, 2);
         Position adj2 = new Position(1, 3);
@@ -86,6 +91,7 @@ class PositionTest {
     }
 
     @Test
+    @TmsLink("TC-POSITION-005")
     void testOccupyAndIsOccupied() {
         assertFalse(position.isOccupied());
         position.occupy();
@@ -93,6 +99,7 @@ class PositionTest {
     }
 
     @Test
+    @TmsLink("TC-POSITION-006")
     void testShootAndIsHit() {
         assertFalse(position.isHit());
         position.shoot();
@@ -100,6 +107,7 @@ class PositionTest {
     }
 
     @Test
+    @TmsLink("TC-POSITION-007")
     void testToString() {
         String s = position.toString();
         assertTrue(s.contains("Linha"));

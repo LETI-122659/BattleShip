@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,17 +20,20 @@ class FleetTest {
     }
 
     @Test
+    @TmsLink("TC-FLEET-001")
     void printShips() {
         assertDoesNotThrow(() -> Fleet.printShips(List.of()));
     }
 
     @Test
+    @TmsLink("TC-FLEET-002")
     void getShips() {
         Fleet fleet = new Fleet();
         assertTrue(fleet.getShips().isEmpty());
     }
 
     @Test
+    @TmsLink("TC-FLEET-003")
     void addShip() {
         class TestFleet extends Fleet {
             @Override
@@ -58,6 +62,7 @@ class FleetTest {
 
 
     @Test
+    @TmsLink("TC-FLEET-004")
     void getShipsLike() {
         Fleet fleet = new Fleet();
         IShip s1 = mockShip("Nau", true);
@@ -70,6 +75,7 @@ class FleetTest {
     }
 
     @Test
+    @TmsLink("TC-FLEET-005")
     void getFloatingShips() {
         Fleet fleet = new Fleet();
         IShip s1 = mockShip("Nau", true);
@@ -82,6 +88,7 @@ class FleetTest {
     }
 
     @Test
+    @TmsLink("TC-FLEET-006")
     void shipAt() {
         Fleet fleet = new Fleet();
         IShip s1 = mock(IShip.class);
@@ -92,24 +99,28 @@ class FleetTest {
     }
 
     @Test
+    @TmsLink("TC-FLEET-007")
     void printStatus() {
         Fleet fleet = new Fleet();
         assertDoesNotThrow(fleet::printStatus);
     }
 
     @Test
+    @TmsLink("TC-FLEET-008")
     void printShipsByCategory() {
         Fleet fleet = new Fleet();
         assertDoesNotThrow(() -> fleet.printShipsByCategory("Nau"));
     }
 
     @Test
+    @TmsLink("TC-FLEET-008")
     void printFloatingShips() {
         Fleet fleet = new Fleet();
         assertDoesNotThrow(fleet::printFloatingShips);
     }
 
     @Test
+    @TmsLink("TC-FLEET-009")
     void printAllShips() {
         Fleet fleet = new Fleet();
         assertDoesNotThrow(fleet::printAllShips);
