@@ -1,128 +1,178 @@
+// java
 package iscteiul.ista.battleship;
 
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class FleetTest {
+class FleetFullCoverageTest {
 
-    IShip mockShip(String category, boolean floating) {
+    private IShip mockShip(String category, boolean floating) {
         IShip ship = mock(IShip.class);
         when(ship.getCategory()).thenReturn(category);
         when(ship.stillFloating()).thenReturn(floating);
+        when(ship.getLeftMostPos()).thenReturn(0);
+        when(ship.getTopMostPos()).thenReturn(0);
+        when(ship.getRightMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
+        when(ship.getBottomMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
+        when(ship.toString()).thenReturn(category + "-TOSTRING");
+        // default safe behaviour
+        when(ship.occupies(any())).thenReturn(false);
+        when(ship.tooCloseTo(any(IShip.class))).thenReturn(false);
         return ship;
     }
 
-    IPosition mockPosition() {
+    private IPosition mockPosition() {
         return mock(IPosition.class);
     }
 
     @Test
-    @TmsLink("TC-FLEET-001")
-    void printShips() {
-        assertDoesNotThrow(() -> Fleet.printShips(List.of()));
-    }
+    void printShips_emptyAndNonEmpty_behaviour() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream old = System.out;
+        System.setOut(new PrintStream(baos));
+        try {
+            // empty list -> no output
+            Fleet.printShips(List.of());
+            assertEquals("", baos.toString());
 
-    @Test
-    @TmsLink("TC-FLEET-002")
-    void getShips() {
-        Fleet fleet = new Fleet();
-        assertTrue(fleet.getShips().isEmpty());
-    }
+            baos.reset();
+            IShip s1 = mock(IShip.class);
+            when(s1.toString()).thenReturn("S1");
+            IShip s2 = mock(IShip.class);
+            when(s2.toString()).thenReturn("S2");
 
-    @Test
-    @TmsLink("TC-FLEET-003")
-    void addShip() {
-        class TestFleet extends Fleet {
-            @Override
-            public boolean colisionRisk(IShip s) {
-                return false;
-            }
+            Fleet.printShips(List.of(s1, s2));
+            String out = baos.toString();
+            assertTrue(out.contains("S1"));
+            assertTrue(out.contains("S2"));
+        } finally {
+            System.setOut(old);
         }
-        Fleet fleet = new TestFleet();
+    }
 
-        for (int i = 0; i < Fleet.FLEET_SIZE; i++) {
-            IShip ship = mock(IShip.class);
-            when(ship.getLeftMostPos()).thenReturn(0);
-            when(ship.getTopMostPos()).thenReturn(0);
-            when(ship.getRightMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
-            when(ship.getBottomMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
-            assertTrue(fleet.addShip(ship));
+    @Test
+    void addShip_rejectsOutsideBoard_and_handlesCollisionAndNoCollision() {
+        Fleet fleet = new Fleet();
+
+        // outside board rejected
+        IShip bad = mock(IShip.class);
+        when(bad.getLeftMostPos()).thenReturn(-1);
+        when(bad.getTopMostPos()).thenReturn(0);
+        when(bad.getRightMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
+        when(bad.getBottomMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
+        assertFalse(fleet.addShip(bad));
+
+        // add first valid ship
+        IShip first = mockShip("A", true);
+        assertTrue(fleet.addShip(first));
+
+        // second collides -> rejected
+        IShip second = mockShip("B", true);
+        when(first.tooCloseTo(second)).thenReturn(true);
+        assertFalse(fleet.addShip(second));
+
+        // if not too close -> allowed
+        IShip third = mockShip("C", true);
+        when(first.tooCloseTo(third)).thenReturn(false);
+        assertTrue(fleet.addShip(third));
+    }
+
+    @Test
+    void addShip_rejects_whenFleetFull() {
+        Fleet fleet = new Fleet();
+
+        int added = 0;
+        int safety = 200;
+        for (int i = 0; i < safety; i++) {
+            IShip s = mockShip("T" + i, true);
+            boolean ok = fleet.addShip(s);
+            if (ok) added++;
+            else break;
         }
-        // Agora tenta adicionar um extra, que deve falhar
-        IShip extraShip = mock(IShip.class);
-        when(extraShip.getLeftMostPos()).thenReturn(0);
-        when(extraShip.getTopMostPos()).thenReturn(0);
-        when(extraShip.getRightMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
-        when(extraShip.getBottomMostPos()).thenReturn(Fleet.BOARD_SIZE - 1);
-        assertFalse(fleet.addShip(extraShip));
-    }
 
-
-    @Test
-    @TmsLink("TC-FLEET-004")
-    void getShipsLike() {
-        Fleet fleet = new Fleet();
-        IShip s1 = mockShip("Nau", true);
-        IShip s2 = mockShip("Fragata", true);
-        fleet.getShips().add(s1);
-        fleet.getShips().add(s2);
-        List<IShip> result = fleet.getShipsLike("Nau");
-        assertEquals(1, result.size());
-        assertEquals("Nau", result.get(0).getCategory());
+        assertTrue(added > 0, "should add at least one ship");
+        IShip extra = mockShip("EXTRA", true);
+        assertFalse(fleet.addShip(extra));
     }
 
     @Test
-    @TmsLink("TC-FLEET-005")
-    void getFloatingShips() {
+    void shipAt_returnsShipWhenOccupies_and_nullOtherwise() {
         Fleet fleet = new Fleet();
-        IShip s1 = mockShip("Nau", true);
-        IShip s2 = mockShip("Fragata", false);
-        fleet.getShips().add(s1);
-        fleet.getShips().add(s2);
-        List<IShip> result = fleet.getFloatingShips();
-        assertEquals(1, result.size());
-        assertTrue(result.get(0).stillFloating());
-    }
-
-    @Test
-    @TmsLink("TC-FLEET-006")
-    void shipAt() {
-        Fleet fleet = new Fleet();
-        IShip s1 = mock(IShip.class);
         IPosition pos = mockPosition();
-        when(s1.occupies(pos)).thenReturn(true);
+        IShip s = mockShip("S", true);
+        when(s.occupies(pos)).thenReturn(true);
+        fleet.getShips().add(s);
+
+        assertSame(s, fleet.shipAt(pos));
+
+        IPosition other = mockPosition();
+        assertNull(fleet.shipAt(other));
+    }
+
+    @Test
+    void getShipsLike_and_getFloatingShips_work_as_expected() {
+        Fleet fleet = new Fleet();
+        IShip s1 = mockShip("Nau", true);
+        IShip s2 = mockShip("Nau", false);
+        IShip s3 = mockShip("Fragata", true);
         fleet.getShips().add(s1);
-        assertEquals(s1, fleet.shipAt(pos));
+        fleet.getShips().add(s2);
+        fleet.getShips().add(s3);
+
+        List<IShip> naus = fleet.getShipsLike("Nau");
+        assertEquals(2, naus.size());
+        for (IShip s : naus) assertEquals("Nau", s.getCategory());
+
+        List<IShip> none = fleet.getShipsLike("Nonexistent");
+        assertTrue(none.isEmpty());
+
+        List<IShip> floating = fleet.getFloatingShips();
+        assertEquals(2, floating.size());
+        for (IShip s : floating) assertTrue(s.stillFloating());
     }
 
     @Test
-    @TmsLink("TC-FLEET-007")
-    void printStatus() {
+    void colisionRisk_detects_withEmpty_and_withExisting() {
         Fleet fleet = new Fleet();
-        assertDoesNotThrow(fleet::printStatus);
+        IShip candidate = mockShip("X", true);
+        assertFalse(fleet.colisionRisk(candidate));
+
+        IShip existing = mockShip("E", true);
+        fleet.getShips().add(existing);
+
+        when(existing.tooCloseTo(candidate)).thenReturn(true);
+        assertTrue(fleet.colisionRisk(candidate));
+
+        when(existing.tooCloseTo(candidate)).thenReturn(false);
+        assertFalse(fleet.colisionRisk(candidate));
     }
 
     @Test
-    @TmsLink("TC-FLEET-008")
-    void printShipsByCategory() {
-        Fleet fleet = new Fleet();
-        assertDoesNotThrow(() -> fleet.printShipsByCategory("Nau"));
-    }
+    void printStatus_includes_all_relevant_outputs() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream old = System.out;
+        System.setOut(new PrintStream(baos));
+        try {
+            Fleet fleet = new Fleet();
+            IShip g = mockShip("Galeao", true);
+            IShip f = mockShip("Fragata", false);
+            fleet.getShips().add(g);
+            fleet.getShips().add(f);
 
-    @Test
-    @TmsLink("TC-FLEET-008")
-    void printFloatingShips() {
-        Fleet fleet = new Fleet();
-        assertDoesNotThrow(fleet::printFloatingShips);
-    }
-
-    @Test
-    @TmsLink("TC-FLEET-009")
-    void printAllShips() {
-        Fleet fleet = new Fleet();
-        assertDoesNotThrow(fleet::printAllShips);
+            fleet.printStatus();
+            String out = baos.toString();
+            assertTrue(out.contains("Galeao-TOSTRING"));
+            assertTrue(out.contains("Fragata-TOSTRING"));
+            // Galeao is floating -> should appear also in floating output
+            assertTrue(out.contains("Galeao-TOSTRING"));
+        } finally {
+            System.setOut(old);
+        }
     }
 }

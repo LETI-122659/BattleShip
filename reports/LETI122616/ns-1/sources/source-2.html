@@ -53,10 +53,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    90%
   </span>
   <span class="absValue">
-    (8/10)
+    (9/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -99,10 +99,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    90%
   </span>
   <span class="absValue">
-    (8/10)
+    (9/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -137,7 +137,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    public Caravel(Compass bearing, IPosition pos) throws NullPointerException, IllegalArgumentException {
 <b class="fc">&nbsp;        super(Caravel.NAME, bearing, pos);</b>
 &nbsp;
-<b class="pc">&nbsp;        if (bearing == null)</b>
+<b class="pc">&nbsp;        if (bearing == null) //dead code porque já está a ser verificado na classe ship, retirado por ser dead code</b>
 <b class="nc">&nbsp;            throw new NullPointerException(&quot;ERROR! invalid bearing for the caravel&quot;);</b>
 &nbsp;
 <b class="pc">&nbsp;        switch (bearing) {</b>
@@ -191,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-18 15:04</div>
+    <div style="float:right;">generated on 2025-11-19 18:26</div>
 </div>
 </body>
 </html>
