@@ -16,12 +16,16 @@ Tags: #unit-tests, #test-cases
 - CaravelTest (TMS-ID: TC-CARAVEL-008)
 - CaravelTest (TMS-ID: TC-CARAVEL-009)
 - CaravelTest (TMS-ID: TC-CARAVEL-010)
+- CaravelTest (TMS-ID: TC-CARAVEL-011)
+- CaravelTest (TMS-ID: TC-CARAVEL-012)
+- CaravelTest (TMS-ID: TC-CARAVEL-013)
 
 * CarrackTest (TMS-ID: TC-CARRACK-001)
 * CarrackTest (TMS-ID: TC-CARRACK-002)
 * CarrackTest (TMS-ID: TC-CARRACK-003)
 * CarrackTest (TMS-ID: TC-CARRACK-004)
 * CarrackTest (TMS-ID: TC-CARRACK-005)
+* CarrackTest (TMS-ID: TC-CARRACK-006)
 
 - CompassTest (TMS-ID: TC-COMPASS-001)
 - CompassTest (TMS-ID: TC-COMPASS-002)

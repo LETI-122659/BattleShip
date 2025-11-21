@@ -84,4 +84,16 @@ class CarrackTest {
         Carrack carrack = new Carrack(Compass.NORTH, basePos);
         assertEquals(3, carrack.getSize());
     }
+    @Test
+    @TmsLink("TC-CARRACK-006")
+    @DisplayName("Criar Carrack com Compass.UNKNOWN deve lançar IllegalArgumentException")
+    void testCarrackUnknownCompass() {
+        Position basePos = new Position(2, 3);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> new Carrack(Compass.UNKNOWN, basePos));
+
+        assertEquals("ERROR! invalid bearing for the carrack", ex.getMessage());
+    }
 }
+

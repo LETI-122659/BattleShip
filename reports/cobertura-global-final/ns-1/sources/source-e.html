@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > IPosition</title>
+  <title>Coverage Report > IShip</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">iscteiul.ista.battleship</a>
 </div>
 
-<h1>Coverage Summary for Class: IPosition (iscteiul.ista.battleship)</h1>
+<h1>Coverage Summary for Class: IShip (iscteiul.ista.battleship)</h1>
 
 <table class="coverageStats">
 
@@ -30,22 +30,22 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">IPosition$MockitoMock$2F4bsi8h</td>
+    <td class="name">IShip$MockitoMock$gT2SpskC</td>
   </tr>
   <tr>
-    <td class="name">IPosition$MockitoMock$2F4bsi8h$auxiliary$jqQ3ZnoF</td>
+    <td class="name">IShip$MockitoMock$gT2SpskC$auxiliary$fuR5XJzn</td>
   </tr>
   <tr>
-    <td class="name">IPosition$MockitoMock$2F4bsi8h$auxiliary$OqoAqhwI</td>
+    <td class="name">IShip$MockitoMock$gT2SpskC$auxiliary$VegMCpSX</td>
   </tr>
   <tr>
-    <td class="name">IPosition$MockitoMock$lgpfe4Pe</td>
+    <td class="name">IShip$MockitoMock$nazfmaIO</td>
   </tr>
   <tr>
-    <td class="name">IPosition$MockitoMock$lgpfe4Pe$auxiliary$a10Jx4T7</td>
+    <td class="name">IShip$MockitoMock$nazfmaIO$auxiliary$lIIwc0Fl</td>
   </tr>
   <tr>
-    <td class="name">IPosition$MockitoMock$lgpfe4Pe$auxiliary$SD39PXz2</td>
+    <td class="name">IShip$MockitoMock$nazfmaIO$auxiliary$P0XmMSVm</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -62,25 +62,36 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; */
 &nbsp;package iscteiul.ista.battleship;
 &nbsp;
-&nbsp;/**
-&nbsp; * @author fba
-&nbsp; */
-&nbsp;public interface IPosition {
-&nbsp;    int getRow();
+&nbsp;import java.util.List;
 &nbsp;
-&nbsp;    int getColumn();
+&nbsp;public interface IShip {
+&nbsp;    String getCategory();
 &nbsp;
-&nbsp;    boolean equals(Object other);
+&nbsp;    Integer getSize();
 &nbsp;
-&nbsp;    boolean isAdjacentTo(IPosition other);
+&nbsp;    List&lt;IPosition&gt; getPositions();
 &nbsp;
-&nbsp;    void occupy();
+&nbsp;    IPosition getPosition();
 &nbsp;
-&nbsp;    void shoot();
+&nbsp;    Compass getBearing();
 &nbsp;
-&nbsp;    boolean isOccupied();
+&nbsp;    boolean stillFloating();
 &nbsp;
-&nbsp;    boolean isHit();
+&nbsp;    int getTopMostPos();
+&nbsp;
+&nbsp;    int getBottomMostPos();
+&nbsp;
+&nbsp;    int getLeftMostPos();
+&nbsp;
+&nbsp;    int getRightMostPos();
+&nbsp;
+&nbsp;    boolean occupies(IPosition pos);
+&nbsp;
+&nbsp;    boolean tooCloseTo(IShip other);
+&nbsp;
+&nbsp;    boolean tooCloseTo(IPosition pos);
+&nbsp;
+&nbsp;    void shoot(IPosition pos);
 &nbsp;}
 </code>
 </pre>
@@ -105,7 +116,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-20 23:09</div>
+    <div style="float:right;">generated on 2025-11-21 21:13</div>
 </div>
 </body>
 </html>
