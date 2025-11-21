@@ -29,10 +29,10 @@
 * [unknown] C5 CarrackTest
     tags: #unit-tests, #test-cases
 
-* [unknown] C6 FrigateTest
+* [passed@LETI122607] C6 FrigateTest
     tags: #unit-tests, #test-cases
 
-* [unknown] C7 GalleonTest
+* [passed@LETI122607] C7 GalleonTest
     tags: #unit-tests, #test-cases
 
 
