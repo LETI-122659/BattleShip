@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ class CarrackTest {
     }
 
     @Test
+    @TmsLink("TC-CARRACK-001")
     @DisplayName("Criação de Carrack com orientação Norte deve gerar posições verticais")
     void testCarrackNorth() {
         Carrack carrack = new Carrack(Compass.NORTH, basePos);
@@ -33,6 +35,7 @@ class CarrackTest {
     }
 
     @Test
+    @TmsLink("TC-CARRACK-002")
     @DisplayName("Criação de Carrack com orientação Sul deve gerar posições verticais")
     void testCarrackSouth() {
         Carrack carrack = new Carrack(Compass.SOUTH, basePos);
@@ -46,6 +49,7 @@ class CarrackTest {
     }
 
     @Test
+    @TmsLink("TC-CARRACK-003")
     @DisplayName("Criação de Carrack com orientação Este deve gerar posições horizontais")
     void testCarrackEast() {
         Carrack carrack = new Carrack(Compass.EAST, basePos);
@@ -59,6 +63,7 @@ class CarrackTest {
     }
 
     @Test
+    @TmsLink("TC-CARRACK-004")
     @DisplayName("Criação de Carrack com orientação Oeste deve gerar posições horizontais")
     void testCarrackWest() {
         Carrack carrack = new Carrack(Compass.WEST, basePos);
@@ -73,6 +78,7 @@ class CarrackTest {
 
 
     @Test
+    @TmsLink("TC-CARRACK-005")
     @DisplayName("getSize() deve retornar 3")
     void testGetSize() {
         Carrack carrack = new Carrack(Compass.NORTH, basePos);

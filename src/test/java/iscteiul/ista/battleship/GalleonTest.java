@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GalleonTest {
 
     @Test
+    @TmsLink("TC-GALLEON-001")
     @DisplayName("Size is not null and positive")
     void testGetSize() {
         Galleon g = new Galleon(Compass.EAST, new Position(2, 3));
@@ -16,6 +18,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-002")
     @DisplayName("Number of positions matches ship size")
     void testPositionsCountMatchesSize() {
         Galleon g = new Galleon(Compass.NORTH, new Position(1, 1));
@@ -23,6 +26,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-003")
     @DisplayName("Positions are correct when facing EAST")
     void testPositionsEast() {
         Position start = new Position(2, 3);
@@ -36,6 +40,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-004")
     @DisplayName("Positions are correct when facing WEST")
     void testPositionsWest() {
         Position start = new Position(5, 10);
@@ -49,6 +54,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-005")
     @DisplayName("Positions are correct when facing NORTH")
     void testPositionsNorth() {
         Position start = new Position(5, 5);
@@ -63,6 +69,7 @@ class GalleonTest {
 
 
     @Test
+    @TmsLink("TC-GALLEON-006")
     @DisplayName("Positions are correct when facing SOUTH")
     void testPositionsSouth() {
         Position start = new Position(3, 4);
@@ -78,6 +85,7 @@ class GalleonTest {
 
 
     @Test
+    @TmsLink("TC-GALLEON-007")
     @DisplayName("Occupies returns correct values")
     void testOccupies() {
         Galleon g = new Galleon(Compass.NORTH, new Position(1, 1));
@@ -87,6 +95,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-008")
     @DisplayName("Shoot marks position as hit")
     void testShoot() {
         Galleon g = new Galleon(Compass.EAST, new Position(2, 2));
@@ -98,6 +107,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-009")
     @DisplayName("Ship still floating until all positions hit")
     void testStillFloating() {
         Galleon g = new Galleon(Compass.EAST, new Position(1, 1));
@@ -114,6 +124,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-010")
     @DisplayName("Bounds: top, bottom, left, right positions")
     void testBounds() {
         Galleon g = new Galleon(Compass.NORTH, new Position(5, 5));
@@ -125,6 +136,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-011")
     @DisplayName("Ship too close to another adjacent ship")
     void testTooCloseToShip() {
         Galleon g1 = new Galleon(Compass.NORTH, new Position(1, 1));
@@ -134,6 +146,7 @@ class GalleonTest {
     }
 
     @Test
+    @TmsLink("TC-GALLEON-012")
     @DisplayName("Not too close when far away")
     void testNotTooClose() {
         Galleon g1 = new Galleon(Compass.NORTH, new Position(1, 1));

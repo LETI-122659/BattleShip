@@ -1,5 +1,6 @@
 package iscteiul.ista.battleship;
 
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FrigateTest {
 
     @Test
+    @TmsLink("TC-FRIGATE-001")
     @DisplayName("Frigate size must be 4")
     void testGetSize() {
         Frigate f = new Frigate(Compass.NORTH, new Position(1, 1));
@@ -15,6 +17,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-002")
     @DisplayName("Positions generated correctly when facing NORTH")
     void testPositionsNorth() {
         Frigate f = new Frigate(Compass.NORTH, new Position(2, 3));
@@ -27,6 +30,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-003")
     @DisplayName("Positions generated correctly when facing EAST")
     void testPositionsEast() {
         Frigate f = new Frigate(Compass.EAST, new Position(5, 1));
@@ -41,6 +45,7 @@ class FrigateTest {
 
 
     @Test
+    @TmsLink("TC-FRIGATE-004")
     @DisplayName("Ship occupies a given position")
     void testOccupies() {
         Frigate f = new Frigate(Compass.NORTH, new Position(1, 1));
@@ -50,6 +55,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-005")
     @DisplayName("stillFloating returns false only when all parts are hit")
     void testStillFloating() {
         Frigate f = new Frigate(Compass.EAST, new Position(1, 1));
@@ -69,6 +75,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-006")
     @DisplayName("shoot only marks hit on exact matching position")
     void testShoot() {
         Frigate f = new Frigate(Compass.NORTH, new Position(2, 2));
@@ -80,6 +87,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-007")
     @DisplayName("Bounds: top, bottom, left, right positions")
     void testBounds() {
         Frigate f = new Frigate(Compass.NORTH, new Position(5, 5));
@@ -91,6 +99,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-008")
     @DisplayName("Too close to another ship")
     void testTooCloseToShip() {
         Frigate f1 = new Frigate(Compass.NORTH, new Position(1, 1));
@@ -100,6 +109,7 @@ class FrigateTest {
     }
 
     @Test
+    @TmsLink("TC-FRIGATE-009")
     @DisplayName("Not too close if far away")
     void testNotTooClose() {
         Frigate f1 = new Frigate(Compass.NORTH, new Position(1, 1));

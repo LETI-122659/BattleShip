@@ -1,6 +1,8 @@
 package iscteiul.ista.battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-001")
     @DisplayName("Caravel deve ter tamanho 2")
     void testGetSize() {
         // Cria uma instância da Caravel com bearing válido (exemplo: NORTH)
@@ -26,6 +29,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-002")
     @DisplayName("Caravel deve adicionar 2 posições corretamente")
     void testGetPositions() {
         // Cria a instância da Caravel com uma direção válida
@@ -40,6 +44,7 @@ class CaravelTest {
                 "A segunda posição da Caravel não está correta.");
     }
     @Test
+    @TmsLink("TC-CARAVEL-003")
     @DisplayName("Caravel ainda flutuando quando todas posições intactas")
     void testStillFloatingAllIntact() {
         Caravel caravel = new Caravel(Compass.NORTH, basePos);
@@ -47,6 +52,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-004")
     @DisplayName("Caravel não flutuando quando todas posições atingidas")
     void testStillFloatingAllHit() {
         Caravel caravel = new Caravel(Compass.NORTH, basePos);
@@ -55,6 +61,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-005")
     @DisplayName("Caravel ainda flutuando quando apenas uma posição atingida")
     void testStillFloatingPartialHit() {
         Caravel caravel = new Caravel(Compass.NORTH, basePos);
@@ -63,6 +70,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-006")
     @DisplayName("Testa limites da Caravel")
     void testLimits() {
         Caravel caravel = new Caravel(Compass.EAST, basePos);
@@ -73,6 +81,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-007")
     @DisplayName("occupies retorna true para posição do navio")
     void testOccupiesTrue() {
         Caravel caravel = new Caravel(Compass.NORTH, basePos);
@@ -80,6 +89,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-008")
     @DisplayName("occupies retorna false para posição fora do navio e null")
     void testOccupiesFalse() {
         Caravel caravel = new Caravel(Compass.NORTH, basePos);
@@ -88,6 +98,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-009")
     @DisplayName("Caravel posiciona corretamente quando EAST")
     void testPositionsEast() {
         Caravel caravel = new Caravel(Compass.EAST, basePos);
@@ -96,6 +107,7 @@ class CaravelTest {
     }
 
     @Test
+    @TmsLink("TC-CARAVEL-010")
     @DisplayName("Caravel posiciona corretamente quando WEST")
     void testPositionsWest() {
         Caravel caravel = new Caravel(Compass.WEST, basePos);
