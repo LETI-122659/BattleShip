@@ -115,6 +115,7 @@ class CaravelTest {
         assertEquals(new Position(0,1), caravel.getPositions().get(1));
     }
     @Test
+    @TmsLink("TC-CARAVEL-011")
     void positions_whenSouth_areCorrect() {
         IPosition base = new Position(3, 4);
         Caravel caravel = new Caravel(Compass.SOUTH, base);
@@ -123,5 +124,28 @@ class CaravelTest {
         assertEquals(new Position(base.getRow() + 1, base.getColumn()), caravel.getPositions().get(1));
     }
 
+    @Test
+    @TmsLink("TC-CARAVEL-012")
+    @DisplayName("Criar Caravel com Compass.UNKNOWN deve lançar IllegalArgumentException")
+    void testCaravelUnknownCompass() {
+        IPosition basePos = new Position(0, 0);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> new Caravel(Compass.UNKNOWN, basePos));
+
+        assertEquals("ERROR! invalid bearing for the caravel", ex.getMessage());
+    }
+
+    @Test
+    @TmsLink("TC-CARAVEL-013")
+    @DisplayName("Criar Caravel com bearing null deve lançar NullPointerException")
+    void testCaravelNullBearing() {
+        IPosition basePos = new Position(0, 0);
+
+        NullPointerException ex = assertThrows(NullPointerException.class,
+                () -> new Caravel(null, basePos));
+
+        assertEquals("ERROR! invalid bearing for the caravel", ex.getMessage());
+    }
 
 }
